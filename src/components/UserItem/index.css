@@ -1,0 +1,50 @@
+.admin-users-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-checkbox {
+  height: 16px;
+  width: 16px;
+  margin-right: 16%;
+  margin-left: 2%;
+  cursor: pointer;
+}
+
+.user-details {
+  width: 20%;
+  color: #000000;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.seperation-line {
+  margin: 2px;
+}
+
+.user-icons {
+  height: 14px;
+  width: 14px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  border: none;
+  background: transparent;
+}
+
+.delete-icon {
+  color: #f02711;
+}
+
+.edit-icon {
+  color: #9dcc83;
+}
+
+.checked-user {
+  background: lightgoldenrodyellow;
+}

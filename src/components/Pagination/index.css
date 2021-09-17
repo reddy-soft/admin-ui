@@ -1,0 +1,54 @@
+.pagination-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.delete-all-button {
+  background: #f02711;
+  color: #ffffff;
+  height: 38px;
+  width: 120px;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 400;
+}
+.pagination-buttons-container {
+  margin: auto;
+  height: 40px;
+}
+
+.pagination-navigation-button {
+  background: #282db0;
+  color: white;
+
+  height: 38px;
+  width: 45px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.pagination-navigation {
+  background: #282db0;
+  color: white;
+
+  height: 38px;
+  width: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.light-button {
+  background: #282db070;
+  color: #282db0;
+}
