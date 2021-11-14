@@ -5,11 +5,16 @@ import Pagination from '../Pagination'
 
 import './index.css'
 
-const apiUrl =
+const userApiUrl =
   'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json'
 
 class AdminUi extends Component {
-  state = {searchInputVal: '', membersData: [], isChecked: false, activePage: 1}
+  state = {
+    searchInputVal: '',
+    membersData: [],
+    isChecked: false,
+    activePage: 1,
+  }
 
   componentDidMount() {
     this.getUsers()
@@ -24,7 +29,7 @@ class AdminUi extends Component {
     const options = {
       method: 'GET',
     }
-    const userResponse = await fetch(apiUrl, options)
+    const userResponse = await fetch(userApiUrl, options)
     const fetchedData = await userResponse.json()
     const updatedUserData = fetchedData.map(eachData =>
       this.getUpdatedUsersData(eachData),
@@ -45,11 +50,18 @@ class AdminUi extends Component {
   }
 
   checkItemsOfUsers = () => {
-    const {membersData} = this.state
-    const updatesUsersStatus = membersData.map(eachData => ({
-      ...eachData,
-      isChecked: !eachData.isChecked,
-    }))
+    const {membersData, activePage} = this.state
+    const startIndex = (activePage - 1) * 10
+    const endIndex = activePage * 10
+    const activePageUsers = membersData.slice(startIndex, endIndex)
+
+    const updatesUsersStatus = membersData.map(eachData => {
+      if (activePageUsers.includes(eachData)) {
+        return {...eachData, isChecked: !eachData.isChecked}
+      }
+      return {...eachData}
+    })
+
     this.setState({membersData: updatesUsersStatus})
   }
 
@@ -64,6 +76,10 @@ class AdminUi extends Component {
   }
 
   onDeleteSelectedUsers = data => {
+    const checkbox = document.getElementById('checkbox')
+
+    checkbox.checked = false
+
     this.setState({
       membersData: data.filter(eachData => eachData.isChecked !== true),
     })
@@ -118,6 +134,7 @@ class AdminUi extends Component {
             type="checkbox"
             className="users-checkbox"
             onClick={this.checkItemsOfUsers}
+            id="checkbox"
           />
           <h1 className="user-heading">Name</h1>
           <h1 className="user-heading">Email</h1>
@@ -138,7 +155,7 @@ class AdminUi extends Component {
         <Pagination
           onDeleteSelectedUsers={this.onDeleteSelectedUsers}
           activePage={activePage}
-          userData={userData}
+          userData={membersData}
           totalActivePageCount={totalActivePageCount}
           onchangeToNextPage={this.onchangeToNextPage}
           onChangeToPreviousPage={this.onChangeToPreviousPage}
